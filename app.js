@@ -22,14 +22,16 @@ const users = require('./routes/users');
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // Middleware
 app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
 app.use(passport.initialize());
 app.use(passport.session());
+require('./config/passport')(passport);
+
 
 // Routes
 app.get('/', (req, res) => {
