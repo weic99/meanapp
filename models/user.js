@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const config = require('../config/database');
-
-
+//const config = require('../config/database');
 // User schema
 const UserSchema = mongoose.Schema({
   name: {
@@ -43,7 +41,7 @@ module.exports.addUser = (newUser, callback) => {
       newUser.password = hash;
       newUser.save(callback);
     });
-  })
+  });
 };
 
 module.exports.comparePassword = (password, hash, callback) => {

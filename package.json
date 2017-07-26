@@ -18,5 +18,8 @@
     "passport-jwt": "*"
   },
   "author": "wei",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@angular/cli": "^1.2.4"
+  }
 }
