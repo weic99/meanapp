@@ -16,22 +16,26 @@ mongoose.connection.on('connected', () => {
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Routes path
+const users = require('./routes/users');
+
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes
-const users = require('./routes/users');
-app.use('/users', users);
 
 // Middleware
 app.use(cors());
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 
+// Routes
 app.get('/', (req, res) => {
   res.send('hello');
 });
+
+app.use('/users', users);
 
 // Start server
 app.listen(port, () => {
