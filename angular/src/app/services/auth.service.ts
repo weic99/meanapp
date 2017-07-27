@@ -24,4 +24,11 @@ export class AuthService {
       {headers: headers}).map(res => res.json()
       );
   }
+
+  storeUserData(token, user) {
+    localStorage.setItem('id_token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.authToken = token;
+    this.user = user;
+  }
 }
