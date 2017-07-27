@@ -7,23 +7,28 @@ import { tokenNotExpired } from 'angular2-jwt';
 export class AuthService {
   authToken: any;
   user: any;
+  isDev: boolean;
 
   constructor(
     private http: Http
-  ) { }
+  ) { 
+    this.isDev = true; 
+  }
 
   registerUser(user) {
     let headers = new Headers();
+    let link = this.prepEndpoint('users/register');
     headers.append('Content-type', 'application/json');
-    return this.http.post('users/register', user, 
+    return this.http.post(link, user, 
       {headers: headers}).map(res => res.json()
       );
   }
 
   authenticateUser(user) {
     let headers = new Headers();
+    let link = this.prepEndpoint('users/authenticate');
     headers.append('Content-type', 'application/json');
-    return this.http.post('users/authenticate', user, 
+    return this.http.post(link, user, 
       {headers: headers}).map(res => res.json()
       );
   }
@@ -35,10 +40,11 @@ export class AuthService {
 
   getProfile() {
     let headers = new Headers();
+    let link = this.prepEndpoint('users/profile');
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
-    return this.http.get('users/profile',
+    return this.http.get(link,
       {headers: headers}).map(res => res.json()
       );    
   }
@@ -58,5 +64,13 @@ export class AuthService {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+  }
+
+   prepEndpoint(ep){
+    if(!this.isDev){
+      return ep;
+    } else {
+      return 'http://localhost:3000/'+ep;
+    }
   }
 }

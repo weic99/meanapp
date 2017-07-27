@@ -1,5 +1,15 @@
 .navbar {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.navbar-brand {
+  color: white !important;
+  font-size: 1.5em !important;
+}
+
+.nav a {
+  color: white !important;
+  font-size: 1.5em !important;
 }
