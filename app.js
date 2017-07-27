@@ -14,7 +14,7 @@ mongoose.connection.on('connected', () => {
 });
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 // Routes path
 const users = require('./routes/users');
@@ -39,6 +39,10 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', users);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 // Start server
 app.listen(port, () => {
